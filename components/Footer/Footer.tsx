@@ -8,13 +8,12 @@ const Footer = () => {
         <div className={css.wrap}>
           <p>Developer: Ihor Tonkovyd</p>
           <p>
-            Contact us:
-            <a href="https://github.com/ITonkovyd/">GitHub</a>
+            Contact us: <a href="https://github.com/ITonkovyd/">GitHub</a>
           </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }
 
 export default Footer
