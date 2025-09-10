@@ -11,7 +11,7 @@ const SearchBox = ({ onChange }: SearchBoxProps) => {
 
   useEffect(() => {
     onChange(searchQuery);
-  }, [searchQuery]);
+  }, [onChange, searchQuery]);
 
   return (
     <input

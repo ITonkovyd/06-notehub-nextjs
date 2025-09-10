@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDebounce } from "use-debounce";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
@@ -19,7 +19,7 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [debouncedQuery] = useDebounce(searchQuery, 1000);
 
-  const { data, isSuccess, isError, isLoading } = useQuery({
+  const { data, isSuccess, isError } = useQuery({
     queryKey: ["notes", page, debouncedQuery],
     queryFn: () => fetchAllNotes(page, debouncedQuery),
     placeholderData: keepPreviousData,
@@ -31,15 +31,15 @@ function App() {
     }
   }, [isError, data]);
 
+  const handleSearchChange = useCallback((query: string) => {
+    setSearchQuery(query);
+    setPage(1);
+  }, []);
+
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
-        <SearchBox
-          onChange={(query) => {
-            setSearchQuery(query);
-            setPage(1);
-          }}
-        />
+        <SearchBox onChange={handleSearchChange} />
         {isSuccess && data.totalPages > 1 && (
           <Pagination
             pagesCount={data.totalPages}
