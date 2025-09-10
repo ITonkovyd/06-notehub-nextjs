@@ -1,11 +1,12 @@
-import * as Yup from 'yup';
-import { Field, Form, Formik, ErrorMessage } from 'formik';
-import { createNote } from '@/lib/api';
+"use client";
 
+import * as Yup from "yup";
+import { Field, Form, Formik, ErrorMessage } from "formik";
+import { createNote } from "@/lib/api";
 
-import css from './NoteForm.module.css';
-import type { BaseNoteParams } from '@/types/note';
-import { useNoteMutation } from '@/hooks/useNoteMutation';
+import css from "./NoteForm.module.css";
+import type { BaseNoteParams } from "@/types/note";
+import { useNoteMutation } from "@/hooks/useNoteMutation";
 
 interface NoteFormProps {
   onClose: () => void;
@@ -13,17 +14,21 @@ interface NoteFormProps {
 
 const NoteForm = ({ onClose }: NoteFormProps) => {
   const formValidationSchema = Yup.object().shape({
-    title: Yup.string().min(2, 'Too Short!')
-     .max(50, 'Too Long!').required("Title is required"),
-    content: Yup.string().max(500, 'Too Long!').required("Content is required"),
-    tag: Yup.string().oneOf(["Work", "Personal", "Shopping", "Meeting", "Todo"]).required("Tag is required")
+    title: Yup.string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Title is required"),
+    content: Yup.string().max(500, "Too Long!").required("Content is required"),
+    tag: Yup.string()
+      .oneOf(["Work", "Personal", "Shopping", "Meeting", "Todo"])
+      .required("Tag is required"),
   });
 
   const createNoteMutation = useNoteMutation({
     mutationFn: (values: BaseNoteParams) => createNote(values),
     queryKey: ["notes"],
     successMsg: "Note created successfully",
-    errorMsg: "Error creating note"
+    errorMsg: "Error creating note",
   });
 
   const handleSubmitForm = (values: BaseNoteParams) => {
@@ -42,7 +47,7 @@ const NoteForm = ({ onClose }: NoteFormProps) => {
           <label htmlFor="title">Title</label>
           <Field id="title" type="text" name="title" className={css.input} />
           <ErrorMessage name="title">
-            {errorMsg => <span className={css.error}>{errorMsg}</span>}
+            {(errorMsg) => <span className={css.error}>{errorMsg}</span>}
           </ErrorMessage>
         </div>
 
@@ -56,7 +61,7 @@ const NoteForm = ({ onClose }: NoteFormProps) => {
             className={css.textarea}
           />
           <ErrorMessage name="content">
-            {errorMsg => <span className={css.error}>{errorMsg}</span>}
+            {(errorMsg) => <span className={css.error}>{errorMsg}</span>}
           </ErrorMessage>
         </div>
 
@@ -70,7 +75,7 @@ const NoteForm = ({ onClose }: NoteFormProps) => {
             <option value="Shopping">Shopping</option>
           </Field>
           <ErrorMessage name="tag">
-            {errorMsg => <span className={css.error}>{errorMsg}</span>}
+            {(errorMsg) => <span className={css.error}>{errorMsg}</span>}
           </ErrorMessage>
         </div>
 
@@ -78,11 +83,7 @@ const NoteForm = ({ onClose }: NoteFormProps) => {
           <button type="button" className={css.cancelButton} onClick={onClose}>
             Cancel
           </button>
-          <button
-            type="submit"
-            className={css.submitButton}
-            disabled={false}
-          >
+          <button type="submit" className={css.submitButton} disabled={false}>
             Create note
           </button>
         </div>

@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
-import { createPortal } from 'react-dom';
+"use client";
 
-import css from './Modal.module.css';
+import { useEffect } from "react";
+import { createPortal } from "react-dom";
+
+import css from "./Modal.module.css";
 
 interface ModalProps {
   onClose: () => void;
@@ -9,7 +11,7 @@ interface ModalProps {
 }
 
 const Modal = ({ onClose, children }: ModalProps) => {
-   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
     }
@@ -38,9 +40,7 @@ const Modal = ({ onClose, children }: ModalProps) => {
       aria-modal="true"
       onClick={handleBackdropClick}
     >
-      <div className={css.modal}>
-        {children}
-      </div>
+      <div className={css.modal}>{children}</div>
     </div>,
     document.body
   );

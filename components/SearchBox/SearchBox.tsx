@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+"use client";
 
-import css from './SearchBox.module.css';
+import { useEffect, useState } from "react";
+
+import css from "./SearchBox.module.css";
 
 interface SearchBoxProps {
   onChange: (query: string) => void;
 }
 
 const SearchBox = ({ onChange }: SearchBoxProps) => {
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     onChange(searchQuery);
