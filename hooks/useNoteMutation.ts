@@ -1,23 +1,23 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 
-import { BaseNoteParams } from "@/types/note";
+import { Note } from "@/types/note";
 
-interface UseNoteMutationOptions {
-  mutationFn: (variables: BaseNoteParams) => Promise<BaseNoteParams>;
+interface UseNoteMutationOptions<T> {
+  mutationFn: (variables: T) => Promise<Note>;
   queryKey: string[];
   successMsg?: string;
   errorMsg?: string;
   successAction?: () => void;
 }
 
-export function useNoteMutation({
+export function useNoteMutation<T>({
   mutationFn,
   queryKey,
   successMsg,
   errorMsg,
   successAction,
-}: UseNoteMutationOptions) {
+}: UseNoteMutationOptions<T>) {
   const queryClient = useQueryClient();
 
   return useMutation({

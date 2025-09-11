@@ -13,5 +13,6 @@
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": false,
+  "importOrderSeparationStyle": "single",
   "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"]
 }
