@@ -12,6 +12,6 @@
     "^[./]"
   ],
   "importOrderSeparation": true,
-  "importOrderSeparationStyle": "single",
-  "importOrderSortSpecifiers": false
+  "importOrderSortSpecifiers": false,
+  "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"]
 }
