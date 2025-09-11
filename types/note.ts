@@ -1,13 +1,13 @@
 export type noteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 
-export type BaseNoteParams = {
+export interface BaseNoteParams {
   title: string;
   content: string;
   tag: noteTag;
-};
+}
 
-export type Note = BaseNoteParams & {
+export interface Note extends BaseNoteParams {
   id: string;
-  createdAt?: string;
-  updatedAt?: string;
-};
+  createdAt: string;
+  updatedAt: string;
+}
