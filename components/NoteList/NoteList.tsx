@@ -1,10 +1,12 @@
 "use client";
 
-import css from "./NoteList.module.css";
-import type { Note } from "@/types/note";
-import { deleteNote } from "@/lib/api";
-import { useNoteMutation } from "@/hooks/useNoteMutation";
 import Link from "next/link";
+
+import { useNoteMutation } from "@/hooks/useNoteMutation";
+import { deleteNote } from "@/lib/api";
+import type { Note } from "@/types/note";
+
+import css from "./NoteList.module.css";
 
 interface NoteListProps {
   notes: Note[];

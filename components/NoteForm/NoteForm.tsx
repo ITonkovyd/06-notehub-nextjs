@@ -1,12 +1,13 @@
 "use client";
 
-import * as Yup from "yup";
 import { Field, Form, Formik, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+import { useNoteMutation } from "@/hooks/useNoteMutation";
 import { createNote } from "@/lib/api";
+import type { BaseNoteParams } from "@/types/note";
 
 import css from "./NoteForm.module.css";
-import type { BaseNoteParams } from "@/types/note";
-import { useNoteMutation } from "@/hooks/useNoteMutation";
 
 interface NoteFormProps {
   onClose: () => void;
