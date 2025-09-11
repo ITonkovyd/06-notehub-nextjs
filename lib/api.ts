@@ -26,7 +26,7 @@ export const fetchAllNotes = async (
   return res.data;
 };
 
-export const fetchNoteById = async (noteId: string) => {
+export const fetchNoteById = async (noteId: string): Promise<Note> => {
   const res = await axios.get<Note>(`${BASE_URL}/notes/${noteId}`, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -35,7 +35,7 @@ export const fetchNoteById = async (noteId: string) => {
   return res.data;
 };
 
-export const createNote = async (newNote: BaseNoteParams) => {
+export const createNote = async (newNote: BaseNoteParams): Promise<Note> => {
   const res = await axios.post<Note>(`${BASE_URL}/notes`, newNote, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -44,10 +44,11 @@ export const createNote = async (newNote: BaseNoteParams) => {
   return res.data;
 };
 
-export const deleteNote = async (noteId: string) => {
-  await axios.delete<Note>(`${BASE_URL}/notes/${noteId}`, {
+export const deleteNote = async (noteId: string): Promise<Note> => {
+  const res = await axios.delete<Note>(`${BASE_URL}/notes/${noteId}`, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
     },
   });
+  return res.data;
 };
