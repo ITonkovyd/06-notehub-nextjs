@@ -6,9 +6,16 @@ interface UseNoteMutationOptions<T> {
   queryKey: string[];
   successMsg?: string;
   errorMsg?: string;
+  successAction?: () => void;
 }
 
-export function useNoteMutation<T = any>({ mutationFn, queryKey, successMsg, errorMsg }: UseNoteMutationOptions<T>) {
+export function useNoteMutation<T = any>({
+  mutationFn,
+  queryKey,
+  successMsg,
+  errorMsg,
+  successAction,
+}: UseNoteMutationOptions<T>) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -16,9 +23,10 @@ export function useNoteMutation<T = any>({ mutationFn, queryKey, successMsg, err
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey });
       if (successMsg) toast.success(successMsg);
+      if (successAction) successAction();
     },
     onError: () => {
       if (errorMsg) toast.error(errorMsg);
-    }
+    },
   });
 }

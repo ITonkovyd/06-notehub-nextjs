@@ -15,10 +15,10 @@ interface NoteFormProps {
 const NoteForm = ({ onClose }: NoteFormProps) => {
   const formValidationSchema = Yup.object().shape({
     title: Yup.string()
-      .min(2, "Too Short!")
+      .min(3, "Too Short!")
       .max(50, "Too Long!")
       .required("Title is required"),
-    content: Yup.string().max(500, "Too Long!").required("Content is required"),
+    content: Yup.string().max(500, "Too Long!"),
     tag: Yup.string()
       .oneOf(["Work", "Personal", "Shopping", "Meeting", "Todo"])
       .required("Tag is required"),
@@ -29,11 +29,11 @@ const NoteForm = ({ onClose }: NoteFormProps) => {
     queryKey: ["notes"],
     successMsg: "Note created successfully",
     errorMsg: "Error creating note",
+    successAction: onClose,
   });
 
   const handleSubmitForm = (values: BaseNoteParams) => {
     createNoteMutation.mutate(values);
-    onClose();
   };
 
   return (
