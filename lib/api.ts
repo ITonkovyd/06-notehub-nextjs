@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import type { Note, BaseNoteParams } from "@/types/note.ts";
 
 const BASE_URL = "https://notehub-public.goit.study/api";
