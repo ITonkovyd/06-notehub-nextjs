@@ -6,7 +6,11 @@ import { deleteNote } from "@/lib/api";
 import { useNoteMutation } from "@/hooks/useNoteMutation";
 import Link from "next/link";
 
-const NoteList = ({ notes }: { notes: Note[] }) => {
+interface NoteListProps {
+  notes: Note[];
+}
+
+const NoteList = ({ notes }: NoteListProps) => {
   const deletingMutation = useNoteMutation({
     mutationFn: (id: string) => deleteNote(id),
     queryKey: ["notes"],
