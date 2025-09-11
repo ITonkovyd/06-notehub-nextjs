@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import css from "./SearchBox.module.css";
 
 interface SearchBoxProps {

@@ -11,6 +11,7 @@
     "^@/(.*)$",
     "^[./]"
   ],
-  "importOrderSeparation": false,
+  "importOrderSeparation": true,
+  "importOrderSeparationStyle": "single",
   "importOrderSortSpecifiers": false
 }
